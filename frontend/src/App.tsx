@@ -23,7 +23,7 @@ function App() {
             <h1>MongoDB Entries</h1>
             <ul>
                 {entries.map((entry, index) => (
-                    <li key={index}>{entry.name} - {entry.subject}</li>
+                    <li key={index}>{entry.prefix} {entry.code} - {entry.course_name}</li>
                 ))}
             </ul>
         </div>
