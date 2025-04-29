@@ -41,10 +41,10 @@ body {
   .text-wrapper-9 {
     font-size: 24px;
     color: #000;
-    margin: 16px 0;
+    margin: 5px 0;
+    margin-bottom: 0px;
     text-align: center;
-    position: fixed;
-    margin-top: 810px;
+    position: relative;
   }
 
   .text-wrapper-10 {
@@ -52,8 +52,8 @@ body {
     color: #000;
     margin: 16px 0;
     text-align: center;
-    position: fixed;
-    margin-top: 840px;
+    position: relative;
+    margin-top: 0px;
   }
 
   .text-wrapper-3 {
@@ -66,11 +66,18 @@ body {
   .profile-images {
     width: 100px;
     height: 100px;
-    margin-top: 700px;
+    margin-top: 20px;
     object-fit: cover;
-    position: fixed;
+    position: relative;
   }
 
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    bottom: 20px;
+    position: fixed;
+  }
   
   .main-content {
     flex: 1;
@@ -373,3 +380,9 @@ body {
     margin-top: 10px;
   }
   
+
+.class-buttons-container {
+  flex: 0.75; /* Fills remaining space */
+  overflow-y: auto;
+  margin-top: 20px;
+}

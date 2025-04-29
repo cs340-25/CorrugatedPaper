@@ -30,7 +30,7 @@ body {
   .text-wrapper-9 {
     font-size: 24px;
     color: #000;
-    margin: 16px 0;
+    margin: 8px 0;
     text-align: center;
   }
 
@@ -45,6 +45,7 @@ body {
     width: 200px;
     height: 200px;
     margin-top: 40px;
+    margin-bottom: 20px;
     object-fit: cover;
   }
   
