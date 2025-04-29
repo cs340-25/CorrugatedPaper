@@ -18,7 +18,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
+    // Connect the client to the server (optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
@@ -36,6 +36,32 @@ async function run() {
         res.status(500).send("Error fetching entries");
       }
     });
+
+// Modified endpoint to return multiple matches
+app.get('/api/classes', async (req, res) => {
+  const query = req.query.name?.toLowerCase();
+  if (!query) return res.status(400).json({ error: "Missing search query" });
+  try {
+    const db = client.db('classes');
+    const collection = db.collection('course');
+
+    // Find multiple matches (limit to 10)
+    const results = await collection.find({
+      $or: [
+        { courseTitle: { $regex: query, $options: "i" } },
+        { courseNumber: { $regex: query, $options: "i" } },
+        { subject: { $regex: query, $options: "i" } },
+        { subjectCourse: { $regex: query, $options: "i" } }
+      ]
+    }).limit(10).toArray();
+
+
+    res.json(results.length > 0 ? { success: true, data: results } : { success: false });
+  } catch (error) {
+    console.error("Error searching classes:", error);
+    res.status(500).json({ success: false, error: "Search failed" });
+  }
+});  
 
   } catch (error) {
     console.error("An error occurred while connecting to MongoDB:", error);
