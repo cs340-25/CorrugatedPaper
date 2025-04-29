@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style - spring.css" />
+    <title>Spring 2025 - Corrugated Paper</title>
+  </head>
+  <body>
+    <div class="home-page">
+      <div class="sidebar">
+        <div class="text-wrapper">Corrugated Paper</div>
+        <div class="label" onclick="togglePopup()">
+          <div class="text-wrapper">+ Add Class</div>
+        </div>
+
+        <!--<div class="class-blocks-sidebar"> -->
+        <!-- Example class info button -->
+        <div class="class-info-button" onclick="createTimeBlocks(this)">
+          <div class="class-name-info">Accounting 201</div>
+          <div class="class-time-info">8:10AM-9:30 AM</div>
+          <div class="class-days-info">M,W,F</div>
+        </div>
+        
+        <!-- Another example class button -->
+        <div class="class-info-button" onclick="createTimeBlocks(this)">
+          <div class="class-name-info">History 101</div>
+          <div class="class-time-info">2:00PM-3:15 PM</div>
+          <div class="class-days-info">T,TH</div>
+        </div>
+        <!-- </div> -->
+        <img class="profile-images" src="Profile2.png" />
+        <div class="text-wrapper-9">User</div>      
+        <div class="text-wrapper-10">Student</div>  
+      </div>
+      <div class="main-content">
+        <div class="top-bar">
+            <div class="top-left-bar">
+              <button class="home-button" onclick="location.href='index - home.html';">Home</button>
+            </div>
+            <div class="top-right-bar">
+                <div class="text-wrapper-2">Spring 2025</div>
+            </div>
+        </div>
+
+        <div class="overlap">
+          <div class="schedule">
+            <!-- Time Column -->
+            <div class="time-column">
+              <div class="time-slot"></div>
+              <div class="time-slot">8 AM</div>
+              <div class="time-slot">9 AM</div>
+              <div class="time-slot">10 AM</div>
+              <div class="time-slot">11 AM</div>
+              <div class="time-slot">12 PM</div>
+              <div class="time-slot">1 PM</div>
+              <div class="time-slot">2 PM</div>
+              <div class="time-slot">3 PM</div>
+              <div class="time-slot">4 PM</div>
+              <div class="time-slot">5 PM</div>
+              <div class="time-slot">6 PM</div>
+              <div class="time-slot">7 PM</div>
+              <div class="time-slot">8 PM</div>
+            </div>
+        
+            <!-- Grid including day headers and lines -->
+            <div class="grid">
+              <!-- Day Headers -->
+              <div class="day-header">MONDAY</div>
+              <div class="day-header">TUESDAY</div>
+              <div class="day-header">WEDNESDAY</div>
+              <div class="day-header">THURSDAY</div>
+              <div class="day-header">FRIDAY</div>
+        
+              <!-- Grid Rows -->
+              <!-- 13 rows for 8 AM to 8 PM -->
+              <!-- Each row has 5 cells (days) -->
+              <!-- Use empty divs to make up the grid -->
+              <!-- Repeat 13×5 -->
+              <!-- You can loop this dynamically with JS if needed -->
+              <!-- For now, doing manually for clarity -->
+        
+              <!-- 8 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 9 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 10 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 11 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 12 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 1 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 2 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 3 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 4 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 5 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 6 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 7 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 8 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+    <!-- Popup HTML -->
+    <div id="addClassPopup" class="popup-overlay">
+      <div class="popup">
+        <span class="close-btn" onclick="togglePopup()">&times;</span>
+        <!--<h2>Add a Class</h2> -->
+        <div class="text-wrapper-4">Search for a class</div>
+        <input type="text" id="searchInput" placeholder="Enter class name..." />
+        <button onclick="searchClass()">Search</button>
+        <div id="classInfo"></div>
+      </div>
+    </div>
+
+    <!-- Popup HTML -->
+    <div id="addClassPopup" class="popup-overlay">
+      <div class="popup">
+        <span class="close-btn" onclick="togglePopup()">&times;</span>
+        <!--<h2>Add a Class</h2> -->
+        <div class="text-wrapper-4">Search for a class</div>
+        <input type="text" id="searchInput" placeholder="Enter class name..." />
+        <button onclick="searchClass()">Search</button>
+        <div id="classInfo"></div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Global class database
+      const classDatabase = [
+        {
+          id: "ACC201",
+          name: "Accounting 201",
+          time: "8:10-9:30 AM",
+          days: "M,W,F",
+          details: "Introduction to Accounting",
+          color: "accounting"
+        },
+        {
+          id: "HIST101",
+          name: "History 101",
+          time: "11:00-3:15 PM",
+          days: "T,TH",
+          details: "World History",
+          color: "history"
+        }
+      ]; // This is where the closing bracket should be
+
+      function togglePopup() {
+        const popup = document.getElementById("addClassPopup");
+        popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+      }
+
+      async function searchClass() {
+        const query = document.getElementById("searchInput").value.trim();
+        const container = document.getElementById("classInfo");
+
+        if (!query) {
+          container.innerHTML = `<em>Enter a class name</em>`;
+          return;
+        }
+
+        container.innerHTML = "Searching...";
+        try {
+          const response = await fetch(`/api/classes?name=${encodeURIComponent(query)}`);
+          if (!response.ok) throw new Error("Network response was not ok");
+          const data = await response.json();
+
+          if (data && data.name) {
+            container.innerHTML = `
+              <strong>Name:</strong> ${data.name}<br>
+              <strong>Time:</strong> ${data.time}<br>
+              <strong>Details:</strong> ${data.details}
+            `;
+          } else {
+            container.innerHTML = `<em>Class not found.</em>`;
+          }
+        } catch (error) {
+          container.innerHTML = `<em>Class not found.</em>`;
+        }
+      }
+      // Function to create time blocks from class info button
+      // Clean version with original styling
+function createTimeBlocks(buttonElement) {
+  try {
+    // Get elements
+    const classNameEl = buttonElement.querySelector('.class-name-info');
+    const timeSlotEl = buttonElement.querySelector('.class-time-info');
+    const daysEl = buttonElement.querySelector('.class-days-info');
+    
+    if (!classNameEl || !timeSlotEl || !daysEl) {
+      return;
+    }
+    
+    const className = classNameEl.textContent;
+    const timeSlot = timeSlotEl.textContent;
+    const days = daysEl.textContent;
+    
+    // Find the grid
+    const grid = document.querySelector('.grid');
+    if (!grid) {
+      return;
+    }
+    
+    // Parse the days
+    const daysList = days.split(',').map(day => day.trim());
+    
+    // Map for day indices
+    const dayMap = {
+      'M': 0,
+      'T': 1,
+      'W': 2,
+      'TH': 3,
+      'F': 4,
+      'MON': 0,
+      'TUE': 1,
+      'WED': 2,
+      'THU': 3,
+      'FRI': 4,
+      'MONDAY': 0,
+      'TUESDAY': 1,
+      'WEDNESDAY': 2,
+      'THURSDAY': 3,
+      'FRIDAY': 4
+    };
+    
+    // Determine position and styling based on class name
+    let topPosition = 50; // Default position (8 AM)
+    let blockHeight = 75; // Default height
+    let classType = 'generic';
+    
+    if (className.includes('Accounting')) {
+      topPosition = 50; // 8 AM
+      classType = 'accounting';
+    } else if (className.includes('History')) {
+      topPosition = 350; // 2 PM (50 + 300)
+      classType = 'history';
+    }
+    
+    // Create blocks for each day
+    daysList.forEach(day => {
+      const dayIndex = dayMap[day];
+      
+      if (dayIndex === undefined) {
+        return; // Skip this day
+      }
+      
+      // Create a block
+      const block = document.createElement('div');
+      block.className = `class-block ${classType}`;
+      
+      // Apply positioning styles inline
+      block.style.position = 'absolute';
+      block.style.top = topPosition + 'px';
+      block.style.left = (dayIndex * 20) + '%';
+      block.style.width = '20%';
+      block.style.height = blockHeight + 'px';
+      block.style.zIndex = '100';
+      block.style.boxSizing = 'border-box';
+      block.style.padding = '8px';
+      block.style.overflow = 'hidden';
+      
+      // Apply class-specific styling
+      if (classType === 'accounting') {
+        block.style.backgroundColor = '#b8d8f0';
+        block.style.border = '1px solid #9ecaeb';
+      } else if (classType === 'history') {
+        block.style.backgroundColor = '#ffb8b8';
+        block.style.border = '1px solid #ff9999';
+      } else {
+        block.style.backgroundColor = '#d8f0b8';
+        block.style.border = '1px solid #c8e0a8';
+      }
+      
+      // Add hover effects
+      block.onmouseover = function() {
+        this.style.boxShadow = '0px 4px 8px rgba(0,0,0,0.3)';
+        this.style.transform = 'translateY(-2px)';
+        this.style.transition = 'all 0.2s ease';
+      };
+      
+      block.onmouseout = function() {
+        this.style.boxShadow = '';
+        this.style.transform = '';
+      };
+      
+      // Content
+      block.innerHTML = `
+        <div class="class-name">${className}</div>
+        <div class="class-details">${timeSlot}</div>
+      `;
+      
+      // Click event for details
+      block.onclick = function() {
+        console.log(`Class: ${className}, Time: ${timeSlot}, Days: ${days}`);
+      };
+      
+      // Add to grid
+      grid.appendChild(block);
+    });
+    
+    // Visual feedback on button
+    buttonElement.style.opacity = 0.6;
+    setTimeout(() => { buttonElement.style.opacity = 1; }, 300);
+    
+    return true;
+  } catch (error) {
+    console.error("Error in createTimeBlocks:", error);
+    return false;
+  }
+}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style - fall.css" />
+    <title>Fall 2025 - Corrugated Paper</title>
+  </head>
+  <body>
+    <div class="home-page">
+      <div class="sidebar">
+        <div class="text-wrapper">Corrugated Paper</div>
+        <div class="label" onclick="togglePopup()">
+          <div class="text-wrapper">+ Add Class</div>
+        </div>
+        <div class="class-buttons-container" id="classButtonsContainer">
+          <!-- Class buttons will be added here dynamically -->
+        </div>
+        <!--<div class="class-blocks-sidebar"> -->
+        <div class="profile-section">
+          <img class="profile-images" src="Profile2.png" />
+          <div class="text-wrapper-9">User</div>      
+          <div class="text-wrapper-10">Student</div>  
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="top-bar">
+            <div class="top-left-bar">
+              <button class="home-button" onclick="location.href='index - home.html';">Home</button>
+            </div>
+            <div class="top-right-bar">
+                <div class="text-wrapper-2">Fall 2025</div>
+            </div>
+        </div>
+
+        <div class="overlap">
+          <div class="schedule">
+            <!-- Time Column -->
+            <div class="time-column">
+              <div class="time-slot"></div>
+              <div class="time-slot">8 AM</div>
+              <div class="time-slot">9 AM</div>
+              <div class="time-slot">10 AM</div>
+              <div class="time-slot">11 AM</div>
+              <div class="time-slot">12 PM</div>
+              <div class="time-slot">1 PM</div>
+              <div class="time-slot">2 PM</div>
+              <div class="time-slot">3 PM</div>
+              <div class="time-slot">4 PM</div>
+              <div class="time-slot">5 PM</div>
+              <div class="time-slot">6 PM</div>
+              <div class="time-slot">7 PM</div>
+              <div class="time-slot">8 PM</div>
+            </div>
+        
+            <!-- Grid including day headers and lines -->
+            <div class="grid">
+              <!-- Day Headers -->
+              <div class="day-header">MONDAY</div>
+              <div class="day-header">TUESDAY</div>
+              <div class="day-header">WEDNESDAY</div>
+              <div class="day-header">THURSDAY</div>
+              <div class="day-header">FRIDAY</div>
+        
+              <!-- Grid Rows -->
+              <!-- 13 rows for 8 AM to 8 PM -->
+              <!-- Each row has 5 cells (days) -->
+              <!-- Use empty divs to make up the grid -->
+              <!-- Repeat 13×5 -->
+              <!-- You can loop this dynamically with JS if needed -->
+              <!-- For now, doing manually for clarity -->
+        
+              <!-- 8 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 9 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 10 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 11 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 12 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 1 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 2 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 3 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 4 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 5 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 6 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 7 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 8 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+    <!-- Popup HTML -->
+    <div id="addClassPopup" class="popup-overlay">
+      <div class="popup">
+        <span class="close-btn" onclick="togglePopup()">&times;</span>
+        <!--<h2>Add a Class</h2> -->
+        <div class="text-wrapper-4">Search for a class</div>
+        <input type="text" id="searchInput" placeholder="Enter class name..." />
+        <button onclick="searchClass()">Search</button>
+        <div id="classInfo"></div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+    //global set colors.
+    // This keeps track of class colors as they're added
+    const classColorMap = new Map();
+    let colorIndex = 0;
+    const classColors = [
+      { bg: '#b8d8f0', border: '#9ecaeb' }, // Light blue
+      { bg: '#ffb8b8', border: '#ff9999' }, // Light red
+      { bg: '#d8f0b8', border: '#c8e0a8' }, // Light green
+      { bg: '#f0e0b8', border: '#e0d0a8' }, // Light orange
+      { bg: '#d8b8f0', border: '#c8a8e0' }, // Light purple
+      { bg: '#b8f0d8', border: '#a8e0c8' }  // Light teal
+    ];
+
+   function togglePopup() {
+        const popup = document.getElementById("addClassPopup");
+        popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+      }   
+
+
+
+//this function clears grid resets color index.
+window.addEventListener('DOMContentLoaded', function() {
+// Clear any existing class blocks
+clearGrid(); 
+// Reset the color map and index
+classColorMap.clear();
+colorIndex = 0;
+});
+
+  //searchClass()
+  async function searchClass() {
+  const query = document.getElementById("searchInput").value.trim();
+  const container = document.getElementById("classInfo");
+
+
+  if (!query) {
+    container.innerHTML = `<em>Enter a class name or course number</em>`;
+    return;
+  }
+
+
+  container.innerHTML = "Searching...";
+  try {
+    const response = await fetch(`http://localhost:5000/api/classes?name=${encodeURIComponent(query)}`);
+   
+    if (!response.ok) throw new Error("Network response was not ok");
+    const responseData = await response.json();
+
+
+    // Check if we got valid data back
+    if (responseData.success && responseData.data && responseData.data.length > 0) {
+      // Create a container for all results
+      let resultsHTML = `<h3>Found ${responseData.data.length} course(s):</h3>`;
+     
+      // Loop through all results
+      responseData.data.forEach((data, index) => {
+        // Format the meeting times nicely
+        let meetingTime = "TBD";
+        if (data.meetingsFaculty && data.meetingsFaculty.length > 0 && data.meetingsFaculty[0].meetingTime) {
+          const meeting = data.meetingsFaculty[0].meetingTime;
+         
+          // Format times from 24-hour format (e.g., "1240" to "12:40 PM")
+          const formatTime = (timeStr) => {
+            if (!timeStr || timeStr === "") return "TBD";
+            const hour = parseInt(timeStr.substring(0, 2));
+            const minute = timeStr.substring(2, 4);
+            const ampm = hour >= 12 ? "PM" : "AM";
+            const hour12 = hour % 12 || 12;
+            return `${hour12}:${minute} ${ampm}`;
+          };
+         
+          const beginTime = formatTime(meeting.beginTime);
+          const endTime = formatTime(meeting.endTime);
+         
+          // Build days string
+          const days = [];
+          if (meeting.monday) days.push("M");
+          if (meeting.tuesday) days.push("T");
+          if (meeting.wednesday) days.push("W");
+          if (meeting.thursday) days.push("TH");
+          if (meeting.friday) days.push("F");
+         
+          meetingTime = `${beginTime} - ${endTime} (${days.join(",")})`;
+        }
+       
+        // Format instructor
+        let instructor = "TBD";
+        if (data.faculty && data.faculty.length > 0 && data.faculty[0].displayName) {
+          instructor = data.faculty[0].displayName;
+        }
+       
+        // Build HTML for this course
+        resultsHTML += `
+          <div class="search-result" style="margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            <strong>${data.subject} ${data.courseNumber} - ${data.courseTitle}</strong><br>
+            <em>${data.subjectDescription || ""}</em><br><br>
+            <strong>Description:</strong> ${data.courseDescription || "N/A"}<br>
+            <strong>Credits:</strong> ${data.creditHourLow || data.creditHours || "?"}<br>
+            <strong>Instructor:</strong> ${instructor}<br>
+            <strong>Meeting Time:</strong> ${meetingTime}<br><br>
+            <button onclick="addClassToSchedule('${data.subject}', '${data.courseNumber}', '${data.courseTitle}', '${meetingTime}')">
+              Add to Schedule
+            </button>
+          </div>
+        `;
+      });
+     
+      // Add a container with scrolling if there are many results
+      container.innerHTML = `
+        <div style="max-height: 400px; overflow-y: auto;">
+          ${resultsHTML}
+        </div>
+      `;
+    } else {
+      container.innerHTML = `<em>No classes found matching "${query}". Try a different search term.</em>`;
+    }
+  } catch (error) {
+    console.error("Search error:", error);
+    container.innerHTML = `<em>Error searching for classes. Please try again later. (${error.message})</em>`;
+  }
+}
+
+
+// Add this function to allow adding classes from search results
+function addClassToSchedule(subject, courseNumber, title, meetingTime) {
+  // Find the class buttons container instead of the sidebar
+  const container = document.getElementById('classButtonsContainer');
+  
+  if (!container) {
+    console.error("Class buttons container not found");
+    return;
+  }
+  
+  // Extract time and days from meetingTime
+  let timeStr = "TBD";
+  let daysStr = "TBD";
+  
+  // Updated regex to match the format with spaces: "12:40 PM - 1:30 PM (M,W,F)"
+  const timeMatch = meetingTime.match(/(\d+:\d+\s*[AP]M)\s*-\s*(\d+:\d+\s*[AP]M)/);
+  const daysMatch = meetingTime.match(/\(([MTWTHF,]+)\)/);
+  
+  if (timeMatch) {
+    // Keep the time format as is (with spaces) since our createTimeBlocks function now handles it
+    timeStr = `${timeMatch[1]}-${timeMatch[2]}`;
+  }
+  
+  if (daysMatch) {
+    daysStr = daysMatch[1];
+  }
+  
+  // Create the class info button
+  const classInfoBtn = document.createElement('div');
+  classInfoBtn.className = 'class-info-button';
+  classInfoBtn.onclick = function() { createTimeBlocks(this); };
+  
+  // Include the subject and course number in the format that createTimeBlocks expects
+  classInfoBtn.innerHTML = `
+    <div class="class-name-info">${subject} ${courseNumber}</div>
+    <div class="class-time-info">${timeStr}</div>
+    <div class="class-days-info">${daysStr}</div>
+  `;
+  
+  // Add to the class buttons container (prepend to add to top)
+  container.prepend(classInfoBtn);
+  
+  // Close the popup
+  togglePopup();
+  
+  // Show confirmation
+  alert(`Added ${subject} ${courseNumber} - ${title} to your schedule!`);
+  
+  // Automatically create the time blocks for the new class
+  setTimeout(() => {
+    createTimeBlocks(classInfoBtn);
+  }, 100);
+}
+
+// Add this to your window.onload or DOMContentLoaded event
+window.addEventListener('DOMContentLoaded', function() {
+  // Create the container if it doesn't exist yet
+  if (!document.getElementById('classButtonsContainer')) {
+    const sidebar = document.querySelector('.sidebar');
+    const profileSection = document.querySelector('.profile-section');
+    
+    if (!profileSection) {
+      // If profile section doesn't exist yet, create it
+      const profileImg = document.querySelector('.profile-images');
+      const userText = document.querySelector('.text-wrapper-9');
+      const roleText = document.querySelector('.text-wrapper-10');
+      
+      if (profileImg && userText && roleText) {
+        // Create profile section
+        const profileSection = document.createElement('div');
+        profileSection.className = 'profile-section';
+        
+        // Move elements to profile section
+        sidebar.removeChild(profileImg);
+        sidebar.removeChild(userText);
+        sidebar.removeChild(roleText);
+        
+        profileSection.appendChild(profileImg);
+        profileSection.appendChild(userText);
+        profileSection.appendChild(roleText);
+        
+        // Create class buttons container
+        const container = document.createElement('div');
+        container.className = 'class-buttons-container';
+        container.id = 'classButtonsContainer';
+        
+        // Add containers to sidebar
+        sidebar.appendChild(container);
+        sidebar.appendChild(profileSection);
+      }
+    }
+  }
+  
+  // Clear any existing class blocks
+  clearGrid();
+  
+  // Reset the color map and index
+  classColorMap.clear();
+  colorIndex = 0;
+});
+
+//CREATE TIME BLOCK.
+function createTimeBlocks(buttonElement) {
+  try {
+    // Get elements
+    const classNameEl = buttonElement.querySelector('.class-name-info');
+    const timeSlotEl = buttonElement.querySelector('.class-time-info');
+    const daysEl = buttonElement.querySelector('.class-days-info');
+    
+    if (!classNameEl || !timeSlotEl || !daysEl) {
+      console.error("Missing required elements in class button");
+      return;
+    }
+    
+    const className = classNameEl.textContent;
+    const timeSlot = timeSlotEl.textContent;
+    const days = daysEl.textContent;
+    
+    console.log(`Creating blocks for: ${className}, Time: ${timeSlot}, Days: ${days}`);
+    
+    // Find the grid
+    const grid = document.querySelector('.grid');
+    if (!grid) {
+      console.error("Grid not found");
+      return;
+    }
+    
+    // Parse the days
+    const daysList = days.split(',').map(day => day.trim());
+    
+    // Map for day indices
+    const dayMap = {
+      'M': 0,
+      'T': 1,
+      'W': 2,
+      'TH': 3,
+      'F': 4
+    };
+    
+    // Parse time slot to determine position and height
+    let topPosition = 50; // Default position (8 AM)
+    let blockHeight = 50; // Default height (1 hour)
+    
+    // Time parsing
+    const timeRegex = /(\d+):(\d+)\s*([AP]M)\s*-\s*(\d+):(\d+)\s*([AP]M)/i;
+    const timeMatch = timeSlot.match(timeRegex);
+    
+    if (timeMatch) {
+      // Extract start and end times
+      const startHour = parseInt(timeMatch[1]);
+      const startMinute = parseInt(timeMatch[2]);
+      const startPeriod = timeMatch[3].toUpperCase();
+      
+      const endHour = parseInt(timeMatch[4]);
+      const endMinute = parseInt(timeMatch[5]);
+      const endPeriod = timeMatch[6].toUpperCase();
+      
+      // Convert to 24-hour format
+      const convertTo24Hour = (hour, minute, period) => {
+        let hour24 = hour;
+        if (period === 'PM' && hour < 12) hour24 += 12;
+        if (period === 'AM' && hour === 12) hour24 = 0;
+        return { hour: hour24, minute };
+      };
+      
+      const startTime = convertTo24Hour(startHour, startMinute, startPeriod);
+      const endTime = convertTo24Hour(endHour, endMinute, endPeriod);
+      
+      // Calculate position based on time slots - FIXED!
+      const hourOffset = startTime.hour - 8; // Offset from 8AM
+      const minuteOffset = startTime.minute / 60; // Convert minutes to fraction of hour
+      // Add 50px to account for the day header row
+      topPosition = (hourOffset + minuteOffset) * 50 + 50; 
+      
+      // Calculate duration in hours
+      let durationHours = (endTime.hour - startTime.hour) + 
+                          (endTime.minute - startTime.minute) / 60;
+      
+      // Ensure minimum block height for visibility
+      blockHeight = Math.max(durationHours * 50, 25);
+      
+      console.log(`Position: ${topPosition}px, Height: ${blockHeight}px`);
+    } else {
+      console.warn(`Could not parse time format: "${timeSlot}"`);
+    }
+    
+    // Simplified color assignment
+    // Check if this class already has a color, if not assign the next color
+    if (!classColorMap.has(className)) {
+      classColorMap.set(className, colorIndex % classColors.length);
+      colorIndex++;
+    }
+    
+    const colorObj = classColors[classColorMap.get(className)];
+    
+    // Create blocks for each day
+    daysList.forEach(day => {
+      const dayIndex = dayMap[day];
+      
+      if (dayIndex === undefined) {
+        console.warn(`Unknown day format: ${day}`);
+        return; // Skip this day
+      }
+      
+      // Create a block
+      const block = document.createElement('div');
+      block.className = `class-block`;
+      
+      // Apply positioning styles inline
+      block.style.position = 'absolute';
+      block.style.top = topPosition + 'px';
+      block.style.left = (dayIndex * 20) + '%';
+      block.style.width = '20%';
+      block.style.height = blockHeight + 'px';
+      block.style.zIndex = '100';
+      block.style.boxSizing = 'border-box';
+      block.style.padding = '8px';
+      block.style.overflow = 'hidden';
+      block.style.borderRadius = '4px';
+      
+      // Apply color from our simple palette
+      block.style.backgroundColor = colorObj.bg;
+      block.style.border = `1px solid ${colorObj.border}`;
+      
+      // Add hover effects
+      block.onmouseover = function() {
+        this.style.boxShadow = '0px 4px 8px rgba(0,0,0,0.3)';
+        this.style.transform = 'translateY(-2px)';
+        this.style.transition = 'all 0.2s ease';
+      };
+      
+      block.onmouseout = function() {
+        this.style.boxShadow = '';
+        this.style.transform = '';
+      };
+      
+      // Content - make sure text fits
+      const timeDisplay = timeSlot.length > 15 ? timeSlot.split('-')[0] + '...' : timeSlot;
+      block.innerHTML = `
+        <div class="class-name" style="font-weight:bold;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+          ${className}
+        </div>
+        <div class="class-details" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+          ${timeDisplay}
+        </div>
+      `;
+      
+      // Click event for details
+      block.onclick = function() {
+        alert(`Class: ${className}\nTime: ${timeSlot}\nDays: ${days}`);
+      };
+      
+      // Add to grid
+      grid.appendChild(block);
+    });
+    
+    // Visual feedback on button
+    buttonElement.style.opacity = 0.6;
+    setTimeout(() => { buttonElement.style.opacity = 1; }, 300);
+    
+    return true;
+  } catch (error) {
+    console.error("Error in createTimeBlocks:", error);
+    return false;
+  }
+}
+    </script>
+  </body>
+</html>
