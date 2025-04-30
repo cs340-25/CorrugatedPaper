@@ -6,7 +6,7 @@ const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://root:root@cluster0.cnbie.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri);
 
-const dataDir = './F25SearchResults'; // Adjust this if your files are in a subfolder
+const dataDir = './F25SearchResults'; 
 
 async function importData() {
   try {
@@ -40,7 +40,7 @@ async function importData() {
       }
     }
 
-    console.log(`✅ Import complete. Total documents inserted: ${totalInserted}`);
+    console.log(`Import complete. Total documents inserted: ${totalInserted}`);
   } catch (error) {
     console.error("❌ Import failed:", error);
   } finally {
