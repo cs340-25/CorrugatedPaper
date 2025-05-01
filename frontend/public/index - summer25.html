@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style - summer.css" />
+    <title>Summer 2025 - Corrugated Paper</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="" />
+     <style>
+      /* Map container styling */
+      #mapContainer {
+        background: white;
+        box-shadow: 0px 4px 16px 4px rgba(190, 81, 3, 0.5);
+        border-radius: 28px;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 40px;
+        position: relative;
+        display: none;
+        transition: opacity 0.2s ease;
+      }
+
+      /* Header styling - lilac */
+      #mapContainer h3 {
+        background-color: #b8a8e0;
+        color: white;
+        margin: 0;
+        padding: 15px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-family: "Khula-Regular", Helvetica;
+        border-bottom: 3px solid #9586c8; /* Darker lilac border */
+      }
+
+      /* The map div itself */
+      #map {
+        height: 400px;
+        border: none !important;
+        padding: 0;
+      }
+
+      /* Custom popup styling */
+      .leaflet-popup-content-wrapper {
+        border: 2px solid #b8a8e0;
+        border-radius: 10px;
+        box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+      }
+
+      .leaflet-popup-tip {
+        background-color: #b8a8e0;
+      }
+      
+      .leaflet-popup-content {
+        padding: 8px;
+        margin: 8px;
+        font-family: "Inter", sans-serif;
+      }
+      
+      /* Custom class for the popup content */
+      .class-popup-content {
+        padding: 5px;
+      }
+      
+      .class-popup-content strong {
+        color: #6a89a7; /* Match your theme's text color */
+        font-size: 16px;
+        display: block;
+        margin-bottom: 4px;
+      }
+      
+      .class-popup-content .building-code {
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+    <!-- Leaflet JS - Properly loaded in head -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+  </head>
+  <body>
+    <div class="home-page">
+      <div class="sidebar">
+        <div class="text-wrapper">Corrugated Paper</div>
+        <div class="label" onclick="togglePopup()">
+          <div class="text-wrapper">+ Add Class</div>
+        </div>
+        <div class="class-buttons-container" id="classButtonsContainer">
+          <!-- Class buttons will be added here dynamically -->
+        </div>
+        <div class="profile-section">
+          <img class="profile-images" id="profileImage" src="Profile2.png" />
+          <div class="text-wrapper-9" id="profileName">User</div>       
+          <div class="text-wrapper-10">Student</div>  
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="top-bar">
+            <div class="top-left-bar">
+              <button class="home-button" onclick="location.href='index - home.html';">Home</button>
+            </div>
+            <div class="top-right-bar">
+                <div class="text-wrapper-2">Summer 2025</div>
+                <button id="mapToggleBtn" class="home-button" onclick="toggleMap()">Show Map</button>
+            </div>
+        </div>
+
+        <!-- Map container - now just one instance -->
+        <div id="mapContainer" style="display: none; margin-top: 20px;">
+          <h3>Classroom Locations</h3>
+          <div id="map" style="height: 400px; border: 1px solid #ccc; border-radius: 10px;"></div>
+        </div>
+
+        <div class="overlap">
+          <div class="schedule">
+            <!-- Time Column -->
+            <div class="time-column">
+              <div class="time-slot"></div>
+              <div class="time-slot">8 AM</div>
+              <div class="time-slot">9 AM</div>
+              <div class="time-slot">10 AM</div>
+              <div class="time-slot">11 AM</div>
+              <div class="time-slot">12 PM</div>
+              <div class="time-slot">1 PM</div>
+              <div class="time-slot">2 PM</div>
+              <div class="time-slot">3 PM</div>
+              <div class="time-slot">4 PM</div>
+              <div class="time-slot">5 PM</div>
+              <div class="time-slot">6 PM</div>
+              <div class="time-slot">7 PM</div>
+              <div class="time-slot">8 PM</div>
+            </div>
+        
+            <!-- Grid including day headers and lines -->
+            <div class="grid">
+              <!-- Day Headers -->
+              <div class="day-header">MONDAY</div>
+              <div class="day-header">TUESDAY</div>
+              <div class="day-header">WEDNESDAY</div>
+              <div class="day-header">THURSDAY</div>
+              <div class="day-header">FRIDAY</div>
+        
+              <!-- Grid Rows -->
+              <!-- 13 rows for 8 AM to 8 PM -->
+              <!-- Each row has 5 cells (days) -->
+              
+              <!-- 8 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 9 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 10 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 11 AM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 12 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 1 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 2 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 3 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 4 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 5 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 6 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 7 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+              <!-- 8 PM -->
+              <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup HTML -->
+    <div id="addClassPopup" class="popup-overlay">
+      <div class="popup">
+        <span class="close-btn" onclick="togglePopup()">&times;</span>
+        <div class="text-wrapper-4">Search for a class</div>
+        <input type="text" id="searchInput" placeholder="Enter class name..." />
+        <button onclick="searchClass()">Search</button>
+        <div id="classInfo"></div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        const storedImage = localStorage.getItem('profileImage');
+        const storedName = localStorage.getItem('username');
+    
+        if (storedImage) {
+          const img = document.getElementById('profileImage');
+          if (img) img.src = storedImage;
+        }
+    
+        if (storedName) {
+          const name = document.getElementById('profileName');
+          if (name) name.textContent = storedName;
+        }
+      });
+    </script>
+    <script>
+    // Global set colors
+    const classColorMap = new Map();
+    let colorIndex = 0;
+    const classColors = [
+      { bg: '#b8d8f0', border: '#9ecaeb' }, // Light blue
+      { bg: '#ffb8b8', border: '#ff9999' }, // Light red
+      { bg: '#d8f0b8', border: '#c8e0a8' }, // Light green
+      { bg: '#f0e0b8', border: '#e0d0a8' }, // Light orange
+      { bg: '#d8b8f0', border: '#c8a8e0' }, // Light purple
+      { bg: '#b8f0d8', border: '#a8e0c8' }  // Light teal
+    ];
+
+    // Global map variable
+    let leafletMap;
+
+    // Custom popup options to match your theme
+    const customPopupOptions = {
+      className: 'custom-popup',
+      closeButton: true,
+      maxWidth: 300
+    };
+
+  // Initialize Leaflet map - but don't create it yet
+  function initMap() {
+  // Create the map only if it doesn't exist yet
+  if (!leafletMap && document.getElementById('map')) {
+    leafletMap = L.map('map', {
+      zoomControl: true,
+      attributionControl: true
+    }).setView([35.9545, -83.9295], 16); // Increased zoom level for better detail
+    
+    // Add OpenStreetMap tiles with a slightly modified style
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      className: 'custom-tiles'
+    }).addTo(leafletMap);
+  }
+}
+    function togglePopup() {
+      const popup = document.getElementById("addClassPopup");
+      popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+    }   
+
+    // Clear grid and reset color index
+    function clearGrid() {
+      // Remove all class blocks
+      const blocks = document.querySelectorAll('.class-block');
+      blocks.forEach(block => block.remove());
+    }
+
+    // Setup things when DOM is loaded
+    window.addEventListener('DOMContentLoaded', function() {
+      // Clear any existing class blocks
+      clearGrid(); 
+      // Reset the color map and index
+      classColorMap.clear();
+      colorIndex = 0;
+
+      // Ensure classButtonsContainer exists
+      if (!document.getElementById('classButtonsContainer')) {
+        const sidebar = document.querySelector('.sidebar');
+        const container = document.createElement('div');
+        container.className = 'class-buttons-container';
+        container.id = 'classButtonsContainer';
+        
+        // Add container to sidebar in correct position (before profile section)
+        const profileSection = document.querySelector('.profile-section');
+        if (profileSection) {
+          sidebar.insertBefore(container, profileSection);
+        } else {
+          sidebar.appendChild(container);
+        }
+      }
+    });
+
+    // searchClass function - fixed template literals
+    async function searchClass() {
+      const query = document.getElementById("searchInput").value.trim();
+      const container = document.getElementById("classInfo");
+
+      if (!query) {
+        container.innerHTML = "<em>Enter a class name or course number</em>";
+        return;
+      }
+
+      container.innerHTML = "Searching...";
+      try {
+        const response = await fetch(`http://localhost:5000/api/classes?name=${encodeURIComponent(query)}`);
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        const responseData = await response.json();
+        // Store all data globally so we can look up building info later
+        window.lastSearchData = responseData.data;
+
+        if (responseData.success && responseData.data && responseData.data.length > 0) {
+          const seenCourses = new Map();
+          responseData.data.forEach(course => {
+            const key = `${course.subject}-${course.courseNumber}`;
+            if (!seenCourses.has(key)) seenCourses.set(key, []);
+            seenCourses.get(key).push(course);
+          });
+
+          let resultsHTML = `<h3>Found ${seenCourses.size} course(s):</h3>`;
+
+          seenCourses.forEach((sections, key) => {
+            const first = sections[0];
+            const sectionId = `sections-${key.replace(/\s+/g, '')}`;
+
+            resultsHTML += `
+              <div class="course-summary" style="margin-bottom:10px; border:1px solid #ccc; border-radius:8px; padding:10px;">
+                <strong>${first.subject} ${first.courseNumber} - ${first.courseTitle}</strong><br>
+                <em>${first.subjectDescription || ""}</em><br>
+                <button onclick="toggleSections('${sectionId}')">View Sections (${sections.length})</button>
+                <div id="${sectionId}" style="display:none; margin-top:10px; padding-left:10px;">
+            `;
+
+            sections.forEach(data => {
+              let meetingTime = "TBD";
+              if (data.meetingsFaculty?.[0]?.meetingTime) {
+                const m = data.meetingsFaculty[0].meetingTime;
+                const formatTime = (t) => {
+                  if (!t) return "TBD";
+                  const h = parseInt(t.slice(0, 2)), mnt = t.slice(2);
+                  const ampm = h >= 12 ? "PM" : "AM";
+                  const h12 = h % 12 || 12;
+                  return `${h12}:${mnt} ${ampm}`;
+                };
+                const daysMap = { M: 'monday', T: 'tuesday', W: 'wednesday', TH: 'thursday', F: 'friday' };
+                const days = Object.entries(daysMap)
+                  .filter(([_, key]) => m[key])
+                  .map(([abbr]) => abbr)
+                  .join(',');
+
+                meetingTime = `${formatTime(m.beginTime)} - ${formatTime(m.endTime)} (${days})`;
+              }
+
+              const instructor = data.faculty?.[0]?.displayName || "TBD";
+
+              resultsHTML += `
+                <div style="margin: 10px 0; padding: 8px; border: 1px dashed #ccc; border-radius: 5px;">
+                  <strong>CRN:</strong> ${data.courseReferenceNumber} <br>
+                  <strong>Instructor:</strong> ${instructor} <br>
+                  <strong>Time:</strong> ${meetingTime} <br>
+                  <button onclick="addClassToSchedule('${data.subject}', '${data.courseNumber}', '${data.courseTitle}', '${meetingTime}')">
+                    Add to Schedule
+                  </button>
+                </div>
+              `;
+            });
+
+            resultsHTML += `</div></div>`;
+          });
+
+          container.innerHTML = `
+            <div style="max-height: 400px; overflow-y: auto;">
+              ${resultsHTML}
+            </div>
+          `;
+        } else {
+          container.innerHTML = `<em>No classes found matching "${query}". Try a different search term.</em>`;
+        }
+      } catch (error) {
+        console.error("Search error:", error);
+        container.innerHTML = `<em>Error searching for classes. Please try again later. (${error.message})</em>`;
+      }
+    }
+
+    // Add class to schedule function
+    function addClassToSchedule(subject, courseNumber, title, meetingTime) {
+      // Find the class buttons container
+      const container = document.getElementById('classButtonsContainer');
+      
+      if (!container) {
+        console.error("Class buttons container not found");
+        return;
+      }
+      
+      // Extract time and days from meetingTime
+      let timeStr = "TBD";
+      let daysStr = "TBD";
+      
+      // Updated regex to match the format with spaces: "12:40 PM - 1:30 PM (M,W,F)"
+      const timeMatch = meetingTime.match(/(\d+:\d+\s*[AP]M)\s*-\s*(\d+:\d+\s*[AP]M)/);
+      const daysMatch = meetingTime.match(/\(([MTWTHF,]+)\)/);
+      
+      if (timeMatch) {
+        // Keep the time format as is (with spaces) since our createTimeBlocks function now handles it
+        timeStr = `${timeMatch[1]}-${timeMatch[2]}`;
+      }
+      
+      if (daysMatch) {
+        daysStr = daysMatch[1];
+      }
+      
+      // Create the class info button
+      const classInfoBtn = document.createElement('div');
+      classInfoBtn.className = 'class-info-button';
+      classInfoBtn.onclick = function() { createTimeBlocks(this); };
+      
+      // Include the subject and course number in the format that createTimeBlocks expects
+      classInfoBtn.innerHTML = `
+        <div class="class-name-info">${subject} ${courseNumber}</div>
+        <div class="class-time-info">${timeStr}</div>
+        <div class="class-days-info">${daysStr}</div>
+      `;
+      
+      // Add to the class buttons container (prepend to add to top)
+      container.prepend(classInfoBtn);
+      
+      // Close the popup
+      togglePopup();
+      
+      // Show confirmation
+      alert(`Added ${subject} ${courseNumber} - ${title} to your schedule!`);
+      
+      // Add to map if map is visible
+      const building = getBuildingCodeForClass(subject, courseNumber);
+      addClassMarker(`${subject} ${courseNumber} - ${title}`, building);
+
+      // Automatically create the time blocks for the new class
+      setTimeout(() => {
+        createTimeBlocks(classInfoBtn);
+      }, 100);
+    }
+
+    // Helper function to get building code
+    function getBuildingCodeForClass(subject, courseNumber) {
+      // Search the full dataset in memory
+      const lastSearchData = window.lastSearchData || [];
+      const match = lastSearchData.find(
+        c => c.subject === subject && c.courseNumber === courseNumber
+      );
+
+      if (match?.meetingsFaculty?.[0]?.meetingTime?.building) {
+        return match.meetingsFaculty[0].meetingTime.building;
+      }
+      return null;
+    }
+
+    // Create time blocks function
+    function createTimeBlocks(buttonElement) {
+      try {
+        // Get elements
+        const classNameEl = buttonElement.querySelector('.class-name-info');
+        const timeSlotEl = buttonElement.querySelector('.class-time-info');
+        const daysEl = buttonElement.querySelector('.class-days-info');
+        
+        if (!classNameEl || !timeSlotEl || !daysEl) {
+          console.error("Missing required elements in class button");
+          return;
+        }
+        
+        const className = classNameEl.textContent;
+        const timeSlot = timeSlotEl.textContent;
+        const days = daysEl.textContent;
+        
+        console.log(`Creating blocks for: ${className}, Time: ${timeSlot}, Days: ${days}`);
+        
+        // Find the grid
+        const grid = document.querySelector('.grid');
+        if (!grid) {
+          console.error("Grid not found");
+          return;
+        }
+        
+        // Parse the days
+        const daysList = days.split(',').map(day => day.trim());
+        
+        // Map for day indices
+        const dayMap = {
+          'M': 0,
+          'T': 1,
+          'W': 2,
+          'TH': 3,
+          'F': 4
+        };
+        
+        // Parse time slot to determine position and height
+        let topPosition = 50; // Default position (8 AM)
+        let blockHeight = 50; // Default height (1 hour)
+        
+        // Time parsing
+        const timeRegex = /(\d+):(\d+)\s*([AP]M)\s*-\s*(\d+):(\d+)\s*([AP]M)/i;
+        const timeMatch = timeSlot.match(timeRegex);
+        
+        if (timeMatch) {
+          // Extract start and end times
+          const startHour = parseInt(timeMatch[1]);
+          const startMinute = parseInt(timeMatch[2]);
+          const startPeriod = timeMatch[3].toUpperCase();
+          
+          const endHour = parseInt(timeMatch[4]);
+          const endMinute = parseInt(timeMatch[5]);
+          const endPeriod = timeMatch[6].toUpperCase();
+          
+          // Convert to 24-hour format
+          const convertTo24Hour = (hour, minute, period) => {
+            let hour24 = hour;
+            if (period === 'PM' && hour < 12) hour24 += 12;
+            if (period === 'AM' && hour === 12) hour24 = 0;
+            return { hour: hour24, minute };
+          };
+          
+          const startTime = convertTo24Hour(startHour, startMinute, startPeriod);
+          const endTime = convertTo24Hour(endHour, endMinute, endPeriod);
+          
+          // Calculate position based on time slots - FIXED!
+          const hourOffset = startTime.hour - 8; // Offset from 8AM
+          const minuteOffset = startTime.minute / 60; // Convert minutes to fraction of hour
+          // Add 50px to account for the day header row
+          topPosition = (hourOffset + minuteOffset) * 50 + 50; 
+          
+          // Calculate duration in hours
+          let durationHours = (endTime.hour - startTime.hour) + 
+                              (endTime.minute - startTime.minute) / 60;
+          
+          // Ensure minimum block height for visibility
+          blockHeight = Math.max(durationHours * 50, 25);
+          
+          console.log(`Position: ${topPosition}px, Height: ${blockHeight}px`);
+        } else {
+          console.warn(`Could not parse time format: "${timeSlot}"`);
+        }
+        
+        // Simplified color assignment
+        // Check if this class already has a color, if not assign the next color
+        if (!classColorMap.has(className)) {
+          classColorMap.set(className, colorIndex % classColors.length);
+          colorIndex++;
+        }
+        
+        const colorObj = classColors[classColorMap.get(className)];
+        
+        // Create blocks for each day
+        daysList.forEach(day => {
+          const dayIndex = dayMap[day];
+          
+          if (dayIndex === undefined) {
+            console.warn(`Unknown day format: ${day}`);
+            return; // Skip this day
+          }
+          
+          // Create a block
+          const block = document.createElement('div');
+          block.className = 'class-block';
+          
+          // Apply positioning styles inline
+          block.style.position = 'absolute';
+          block.style.top = topPosition + 'px';
+          block.style.left = (dayIndex * 20) + '%';
+          block.style.width = '20%';
+          block.style.height = blockHeight + 'px';
+          block.style.zIndex = '100';
+          block.style.boxSizing = 'border-box';
+          block.style.padding = '8px';
+          block.style.overflow = 'hidden';
+          block.style.borderRadius = '4px';
+          
+          // Apply color from our simple palette
+          block.style.backgroundColor = colorObj.bg;
+          block.style.border = `1px solid ${colorObj.border}`;
+          
+          // Add hover effects
+          block.onmouseover = function() {
+            this.style.boxShadow = '0px 4px 8px rgba(0,0,0,0.3)';
+            this.style.transform = 'translateY(-2px)';
+            this.style.transition = 'all 0.2s ease';
+          };
+          
+          block.onmouseout = function() {
+            this.style.boxShadow = '';
+            this.style.transform = '';
+          };
+          
+          // Content - make sure text fits
+          const timeDisplay = timeSlot.length > 15 ? timeSlot.split('-')[0] + '...' : timeSlot;
+          block.innerHTML = `
+            <div class="class-name" style="font-weight:bold;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              ${className}
+            </div>
+            <div class="class-details" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              ${timeDisplay}
+            </div>
+          `;
+          
+          // Click event for details
+          block.onclick = function() {
+            alert(`Class: ${className}\nTime: ${timeSlot}\nDays: ${days}`);
+          };
+          
+          // Add to grid
+          grid.appendChild(block);
+        });
+        
+        // Visual feedback on button
+        buttonElement.style.opacity = 0.6;
+        setTimeout(() => { buttonElement.style.opacity = 1; }, 300);
+        
+        return true;
+      } catch (error) {
+        console.error("Error in createTimeBlocks:", error);
+        return false;
+      }
+    }
+
+    function toggleSections(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+
+    /* Mapping of building codes to coordinates - Fixed syntax */
+    const buildingCoords = {
+      "HBB": [35.955720,-83.928610], // Haslam Building
+      "ZEC": [35.955759,-83.923573], // Zeanah
+      "AAB": [35.952583,-83.929453], // art and arch
+      "AMB": [35.956020,-83.926481], // alumni memorial
+      "AMM": [35.942488,-83.952670], // advanced manufacturing 
+      "AYR": [35.957479,-83.925958], // ayres hall
+      "BAS": [35.947369,-83.941528], // BAS Brehm Animal Science
+      "BGB": [35.956560,-83.927492], // BGB Burchfiel Geography Building
+      "BCC": [35.953615,-83.932123], //frieson black cultural center
+      "BEC": [35.954359,-83.927369], // jane and david
+      "BEO": [35.948156,-83.940010], //Biosystems Engineering & Environmental Sciences
+      "BUE": [35.958045,-83.925037], //buehler hall
+      "CLX": [35.9545597,-83.93056], // edu
+      "DOU": [35.957778,-83.923987], //dougherty
+      "HBS": [35.956443,-83.931660], //baker public policy
+      "HMC": [35.951973,-83.930708],
+      "HSS": [35.953665,-83.929024], //hss
+      "JHB": [35.959226,-83.926036],
+      "MKB": [35.958482,-83.924591], //mkb
+      "MOS": [35.959029,-83.927093], //mossman
+      "NEB": [35.956889,-83.924754],
+      "PER": [35.956488,-83.923879],
+      "PHY": [35.956545,-83.925499],
+      "SMC": [35.956211,-83.929019],
+      "TIC": [35.955636,-83.922616],
+      "WAB": [35.957198,-83.927715],
+      "STR": [35.957490,-83.931373],
+      "PBB": [35.948194,-83.941300],
+      "LIB": [35.955055,-83.929840],
+      "STH": [35.957291,-83.925261],
+      "FER": [35.956703,-83.923375],
+      "APB": [35.957153,-83.926980], 
+      "HBG": [35.956467,-83.926165],
+      "CLX": [35.954773,-83.928123],
+      "MCM": [35.951999,-83.927141],
+      "ONLINE": null // Don't plot online buildings
+    };
+
+    // Function to add a marker for a class
+  function addClassMarker(className, buildingCode) {
+  // Store markers to add when map becomes visible
+  if (!window.pendingMarkers) {
+    window.pendingMarkers = [];
+  }
+  // If building code is invalid or there are no coordinates, return early
+  if (!buildingCode || !buildingCoords[buildingCode]) {
+    console.log(`No coordinates found for building code: ${buildingCode}`);
+    return;
+  }
+  const coords = buildingCoords[buildingCode];
+  if (!coords) return; // Skip if unknown or online
+  
+  // Check if map is visible and initialized
+  const mapContainer = document.getElementById('mapContainer');
+  const isMapVisible = mapContainer && mapContainer.style.display === 'block';
+  
+  if (isMapVisible && leafletMap) {
+    // Map is visible and initialized, add marker immediately
+    console.log(`Adding marker for ${className} at building ${buildingCode}: ${coords}`);
+    const popupContent = `
+      <div class="class-popup-content">
+        <strong>${className}</strong>
+        <span class="building-code">Building: ${buildingCode}</span>
+      </div>
+    `;
+    const marker = L.marker(coords).addTo(leafletMap);
+    marker.bindPopup(popupContent, customPopupOptions);
+  } else {
+    // Map is not visible or not initialized, store marker to add later
+    console.log(`Storing marker for ${className} at building ${buildingCode} for later`);
+    window.pendingMarkers.push({
+      className: className,
+      buildingCode: buildingCode,
+      coords: coords
+    });
+    }
+  }
+
+  //toggle map
+  function toggleMap() {
+  const mapContainer = document.getElementById('mapContainer');
+  const toggleBtn = document.getElementById('mapToggleBtn');
+
+  if (!mapContainer || !toggleBtn) return;
+
+  const isVisible = mapContainer.style.display === 'block';
+
+  if (isVisible) {
+    // Hide the map with a slight animation
+    mapContainer.style.opacity = '0';
+    setTimeout(() => {
+      mapContainer.style.display = 'none';
+      toggleBtn.textContent = 'Show Map';
+    }, 200);
+  } else {
+    // Show the map with animation
+    mapContainer.style.display = 'block';
+    mapContainer.style.opacity = '0';
+    
+    setTimeout(() => {
+      mapContainer.style.opacity = '1';
+      toggleBtn.textContent = 'Hide Map';
+      
+      // Initialize map if not already done
+      initMap();
+      
+      // When displayed, make sure the map renders correctly
+      if (leafletMap) {
+        leafletMap.invalidateSize();
+        
+        // Add any pending markers
+        if (window.pendingMarkers && window.pendingMarkers.length > 0) {
+          console.log(`Adding ${window.pendingMarkers.length} pending markers to map`);
+          
+          window.pendingMarkers.forEach(markerInfo => {
+            // Create themed popup content
+            const popupContent = `
+              <div class="class-popup-content">
+                <strong>${markerInfo.className}</strong>
+                <span class="building-code">Building: ${markerInfo.buildingCode}</span>
+              </div>
+            `;
+            
+            const marker = L.marker(markerInfo.coords).addTo(leafletMap);
+            marker.bindPopup(popupContent, customPopupOptions);
+          });
+          
+          // Center map to fit all markers
+          if (window.pendingMarkers.length > 0) {
+            const bounds = L.latLngBounds(window.pendingMarkers.map(m => m.coords));
+            if (bounds.isValid()) {
+              leafletMap.fitBounds(bounds, {
+                padding: [50, 50],
+                maxZoom: 17
+              });
+            }
+          }
+          window.pendingMarkers = [];
+        }
+      }
+    }, 10);
+  }
+}
+    </script>
+  </body>
+</html>
