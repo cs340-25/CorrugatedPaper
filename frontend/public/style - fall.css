@@ -3,383 +3,384 @@ body {
     font-family: "Inter", sans-serif;
 }
   
-  .home-page {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .sidebar {
-    background-color: #f7f8fa;
-    width: 300px;
-    padding: 40px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-  }
+.home-page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  /*.class-blocks-sidebar {
-    margin-top: 160px;
-    margin-bottom: 350px;
-    margin-left: 25px;
-    position: fixed;
-  }
-  /*width: 23vw;
-    height: 55vh;
-    overflow-y: scroll;
-  }*/
-  
-  .text-wrapper {
-    font-size: 32px;
-    color: #6a89a7;
-    margin-bottom: 40px;
-    text-align: center;
-    font-family: "Garamond", serif;
-  }
-  
-  .text-wrapper-9 {
-    font-size: 24px;
-    color: #000;
-    margin: 5px 0;
-    margin-bottom: 0px;
-    text-align: center;
-    position: relative;
-  }
+.sidebar {
+  background-color: #f7f8fa;
+  width: 300px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
 
-  .text-wrapper-10 {
-    font-size: 24px;
-    color: #000;
-    margin: 16px 0;
-    text-align: center;
-    position: relative;
-    margin-top: 0px;
-  }
+/*.class-blocks-sidebar {
+  margin-top: 160px;
+  margin-bottom: 350px;
+  margin-left: 25px;
+  position: fixed;
+}
+/*width: 23vw;
+  height: 55vh;
+  overflow-y: scroll;
+}*/
 
-  .text-wrapper-3 {
-    font-size: 24px;
-    color: #000;
-    margin: 16px 0;
-    text-align: left;
-  }
-  
-  .profile-images {
-    width: 100px;
-    height: 100px;
-    margin-top: 20px;
-    object-fit: cover;
-    position: relative;
-  }
+.text-wrapper {
+  font-size: 32px;
+  color: #6a89a7;
+  margin-bottom: 40px;
+  text-align: center;
+  font-family: "Garamond", serif;
+}
 
-  .profile-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    bottom: 20px;
-    position: fixed;
-  }
-  
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: #f7f8fa;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 29px;
-    margin-top: 10px;
-    margin-right: 40px;
-    margin-left: 20px;
-  }
+.text-wrapper-9 {
+  font-size: 24px;
+  color: #000;
+  margin: 8px 0;
+  margin-bottom: 2px;
+  text-align: center;
+  position: relative;
+}
 
-  .top-left-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-right: 20px;
-  }
+.text-wrapper-10 {
+  font-size: 24px;
+  color: #000;
+  margin: 0px 0;
+  text-align: center;
+  position: relative;
+  font-family: "Garamond", serif;
+  font-weight: lighter;
+}
 
-  .home-button {
-    background-color: #f5e170;  /* Light pastel blue color */
-    border: none;
-    border-radius: 28px;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-family: "Khula-Regular", Helvetica;
-    font-weight: bold;
-    color: #885526;
-    cursor: pointer;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-  }
-  
-  .home-button:hover {
-    background-color: #c8a43a;
-    transform: translateY(-2px);
-  }
- 
-  .text-wrapper-2{
-    font-size: 28px;
-    color: #6a89a7;
-    /*margin-bottom: 20px;*/
-  }
+.text-wrapper-3 {
+  font-size: 24px;
+  color: #000;
+  margin: 16px 0;
+  text-align: left;
+}
 
-  .text-wrapper-4{
-    font-size: 28px;
-    color: #6a89a7;
-    margin-bottom: 20px;
-  }
-  
-  .overlap {
-    background: white;
-    box-shadow: 0px 4px 16px 4px #BE5103;
-    border-radius: 28px;
-    padding: 20px;
-    flex: 1;
-    overflow-y: auto;
-    margin-bottom: 40px;
-    margin-right: 40px;
-  }
-    
-  .text {
-    font-size: 32px;
-    color: white;
-    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-    font-weight: bold;
-    text-align: center;
-  }
-    
-  .schedule {
-    display: flex;
-    align-items: flex-start;
-    /*padding: 20px;*/
-  }
-  
-  /* Time Column */
-  .time-column {
-    display: flex;
-    flex-direction: column;
-    width: 60px;
-    margin-right: 10px;
-  }
-  
-  .time-slot {
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 8px;
-    font-size: 14px;
-  }
-  
-  /* Grid Container */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 50px;
-    position: relative;
-    flex: 1;
-    margin-top: 20px; /* <- This does the magic */
-  }  
-  
-  /* Day Headers */
-  .day-header {
-    text-align: center;
-    font-weight: lighter;
-    line-height: 50px;
-    color: #6a89a7;
-    /*background: #f8f8f8;
-    border-bottom: 1px solid #ddd;*/
-  }
-  
-  /* Grid Cells */
-  .cell {
-    border-top: 1px dotted #ccc;
-    border-left: 1px solid #eee;
-    position: relative;
-  }
-  
-  .cell:nth-child(5n) {
-    border-right: 1px solid #eee;
-  }
+.profile-images {
+  width: 100px;
+  height: 100px;
+  margin-top: 20px;
+  object-fit: cover;
+  position: relative;
+}
 
-  /*Add Class*/
-  .label {
-    /*width: 300px;
-    height: 75px;*/
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 20px;
+  position: fixed;
+}
 
-    background-color: rgb(141, 202, 182);
-    height: 75px;
-    width: 300px;
-    border-radius: 28px;
-    box-shadow: 0px 4px 8px rgba(14, 82, 59, 0.25);
-    display: flex;
-    /*align-items: center;*/
-    justify-content: center;
-  }
-  .label .text-wrapper { 
-    /*position: relative;
-    width: 300px;
-    height: 75px;
-    top: 0;
-    left: 0;*/
-    font-family: "Khula-Regular", Helvetica;
-    font-weight: bold;
-    color: #2b5c58;
-    font-size: 32px;
-    text-align: center;
-    /*letter-spacing: 0;
-    line-height: normal;
-    background-color: darkgrey;*/
-    padding: 17px;
-  }
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f8fa;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-  .label:hover {
-    background-color: #388573;
-    transform: translateY(-4px);
-  }
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 29px;
+  margin-top: 10px;
+  margin-right: 40px;
+  margin-left: 20px;
+}
 
-  /*CLASS INFO BUTTONS*/
-  .class-info-button {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-top: 20px;
-    padding: 15px;
-    width: 260px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .class-info-button:hover {
-    background-color: #e0e0e0;
-    transform: translateY(-2px);
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  .class-name-info {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  
-  .class-time-info, .class-days-info {
-    font-size: 14px;
-    color: #444;
-    margin-bottom: 3px;
-  }
-  
-  /* First class should be blue */
-  .class-info-button:nth-child(3) {
-    background-color: #b8d8f0;
-    border-color: #9ecaeb;
-  }
-  
-  /* Second class should be light red */
-  .class-info-button:nth-child(4) {
-    background-color: #ffb8b8;
-    border-color: #ff9999;
-  }
+.top-left-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 20px;
+}
 
-  /* Class blocks styling */
-  .class-block {
-    position: absolute;
-    border-radius: 8px;
-    padding: 8px;
-    font-size: 14px;
-    z-index: 10;
-    overflow: hidden;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .class-block:hover {
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
-    transform: translateY(-2px);
-  }
-  
-  .class-block.accounting {
-    background-color: #b8d8f0; /* Light blue for accounting */
-    border: 1px solid #9ecaeb;
-  }
-  
-  .class-block.history {
-    background-color: #ffb8b8; /* Light red for history */
-    border: 2px solid #ff9999;
-    z-index: 30;
-    width: calc(20% - 6px);
-    max-height: 80 px;
-    position: absolute;
-  }
-  
-  .class-block.generic {
-    background-color: #d8f0b8; /* Light green for generic classes */
-    border: 1px solid #c8e0a8;
-  }
-  
-  .class-name {
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .class-details {
-    font-size: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.home-button {
+  background-color: #f5e170;  /* Light pastel blue color */
+  border: none;
+  border-radius: 28px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: "Khula-Regular", Helvetica;
+  font-weight: bold;
+  color: #885526;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
 
-  /* POpup */
-  .popup-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  .popup {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 90%;
-    text-align: center;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.3);
-  }
-  .popup h2 {
-    margin-bottom: 20px;
-  }
-  .popup input[type="text"] {
-    margin-bottom: 10px;
-    padding: 8px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .popup button {
-    margin-bottom: 20px;
-    padding: 8px 16px;
-  }
-  .close-btn {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  #classInfo {
-    margin-top: 10px;
-  }
+.home-button:hover {
+  background-color: #c8a43a;
+  transform: translateY(-2px);
+}
+
+.text-wrapper-2{
+  font-size: 28px;
+  color: #6a89a7;
+  /*margin-bottom: 20px;*/
+}
+
+.text-wrapper-4{
+  font-size: 28px;
+  color: #6a89a7;
+  margin-bottom: 20px;
+}
+
+.overlap {
+  background: white;
+  box-shadow: 0px 4px 16px 4px #BE5103;
+  border-radius: 28px;
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 40px;
+  margin-right: 40px;
+}
   
+.text {
+  font-size: 32px;
+  color: white;
+  text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  font-weight: bold;
+  text-align: center;
+}
+  
+.schedule {
+  display: flex;
+  align-items: flex-start;
+  /*padding: 20px;*/
+}
+
+/* Time Column */
+.time-column {
+  display: flex;
+  flex-direction: column;
+  width: 60px;
+  margin-right: 10px;
+}
+
+.time-slot {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  font-size: 14px;
+}
+
+/* Grid Container */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 50px;
+  position: relative;
+  flex: 1;
+  margin-top: 20px; /* <- This does the magic */
+}  
+
+/* Day Headers */
+.day-header {
+  text-align: center;
+  font-weight: lighter;
+  line-height: 50px;
+  color: #6a89a7;
+  /*background: #f8f8f8;
+  border-bottom: 1px solid #ddd;*/
+}
+
+/* Grid Cells */
+.cell {
+  border-top: 1px dotted #ccc;
+  border-left: 1px solid #eee;
+  position: relative;
+}
+
+.cell:nth-child(5n) {
+  border-right: 1px solid #eee;
+}
+
+/*Add Class*/
+.label {
+  /*width: 300px;
+  height: 75px;*/
+
+  background-color: rgb(141, 202, 182);
+  height: 75px;
+  width: 300px;
+  border-radius: 28px;
+  box-shadow: 0px 4px 8px rgba(14, 82, 59, 0.25);
+  display: flex;
+  /*align-items: center;*/
+  justify-content: center;
+}
+.label .text-wrapper { 
+  /*position: relative;
+  width: 300px;
+  height: 75px;
+  top: 0;
+  left: 0;*/
+  font-family: "Khula-Regular", Helvetica;
+  font-weight: bold;
+  color: #2b5c58;
+  font-size: 32px;
+  text-align: center;
+  /*letter-spacing: 0;
+  line-height: normal;
+  background-color: darkgrey;*/
+  padding: 17px;
+}
+
+.label:hover {
+  background-color: #388573;
+  transform: translateY(-4px);
+}
+
+/*CLASS INFO BUTTONS*/
+.class-info-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 15px;
+  width: 260px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.class-info-button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+}
+
+.class-name-info {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.class-time-info, .class-days-info {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 3px;
+}
+
+/* First class should be blue */
+.class-info-button:nth-child(3) {
+  background-color: #b8d8f0;
+  border-color: #9ecaeb;
+}
+
+/* Second class should be light red */
+.class-info-button:nth-child(4) {
+  background-color: #ffb8b8;
+  border-color: #ff9999;
+}
+
+/* Class blocks styling */
+.class-block {
+  position: absolute;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 14px;
+  z-index: 10;
+  overflow: hidden;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.class-block:hover {
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+
+.class-block.accounting {
+  background-color: #b8d8f0; /* Light blue for accounting */
+  border: 1px solid #9ecaeb;
+}
+
+.class-block.history {
+  background-color: #ffb8b8; /* Light red for history */
+  border: 2px solid #ff9999;
+  z-index: 30;
+  width: calc(20% - 6px);
+  max-height: 80 px;
+  position: absolute;
+}
+
+.class-block.generic {
+  background-color: #d8f0b8; /* Light green for generic classes */
+  border: 1px solid #c8e0a8;
+}
+
+.class-name {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.class-details {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.popup {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0px 4px 16px rgba(0,0,0,0.3);
+}
+.popup h2 {
+  margin-bottom: 20px;
+}
+.popup input[type="text"] {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.popup button {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+}
+.close-btn {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+#classInfo {
+  margin-top: 10px;
+}
+
 
 .class-buttons-container {
   flex: 0.75; /* Fills remaining space */

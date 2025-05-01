@@ -41,19 +41,20 @@ body {
   .text-wrapper-9 {
     font-size: 24px;
     color: #000;
-    margin: 5px 0;
-    margin-bottom: 0px;
+    margin: 8px 0;
+    margin-bottom: 2px;
     text-align: center;
     position: relative;
   }
-
+  
   .text-wrapper-10 {
     font-size: 24px;
     color: #000;
-    margin: 16px 0;
+    margin: 0px 0;
     text-align: center;
     position: relative;
-    margin-top: 0px;
+    font-family: "Garamond", serif;
+    font-weight: lighter;
   }
 
   .text-wrapper-3 {

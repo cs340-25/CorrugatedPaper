@@ -94,8 +94,8 @@
           <!-- Class buttons will be added here dynamically -->
         </div>
         <div class="profile-section">
-          <img class="profile-images" src="Profile2.png" />
-          <div class="text-wrapper-9">User</div>      
+          <img class="profile-images" id="profileImage" src="Profile2.png" />
+          <div class="text-wrapper-9" id="profileName">User</div>       
           <div class="text-wrapper-10">Student</div>  
         </div>
       </div>
@@ -193,6 +193,22 @@
     </div>
 
     <!-- JavaScript -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        const storedImage = localStorage.getItem('profileImage');
+        const storedName = localStorage.getItem('username');
+    
+        if (storedImage) {
+          const img = document.getElementById('profileImage');
+          if (img) img.src = storedImage;
+        }
+    
+        if (storedName) {
+          const name = document.getElementById('profileName');
+          if (name) name.textContent = storedName;
+        }
+      });
+    </script>
     <script>
     // Global set colors
     const classColorMap = new Map();

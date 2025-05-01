@@ -11,14 +11,14 @@
         <div class="text-wrapper">Corrugated Paper</div>
         <img class="profile-images" src="Profile2.png" />
         <div class="text-wrapper-9">User</div>      
-        <div class="text-wrapper-9">Student</div>  
+        <div class="text-wrapper-10">Student</div>  
       </div>
 
       <div class="main-content">
         <div class="top-bar">
             <div class="top-left-bar">
                 <div class="text-wrapper-3">Home</div>
-            </div>
+            </div> 
             <div class="top-right-bar">
                 <div class="text-wrapper-2">Dashboard</div>
             </div>
@@ -41,7 +41,7 @@
             </div>
 
             <div class="summer">
-              <div class="card summer"><div class="text">SUMMER 25</div></div>
+              <div class="card summer"onclick="location.href='index - summer25.html';" style="cursor: pointer;"><div class="text">SUMMER 25</div></div>
               <div class="card summer"><div class="text">SUMMER 26</div></div>
               <div class="card summer"><div class="text">SUMMER 27</div></div>
               <div class="card summer"><div class="text">SUMMER 28</div></div>
@@ -50,5 +50,107 @@
         </div>
       </div>
     </div>
+
+    <!-- Profile Image Popup Modal -->
+    <div id="imageModal" style="
+      display:none; 
+      position:fixed; 
+      top:10%; 
+      left:50%; 
+      transform:translateX(-50%); 
+      background:white; 
+      padding:20px; 
+      border:1px solid #ccc; 
+      border-radius:12px; 
+      z-index:1000;
+      width: 400px;
+      text-align: center;
+    ">
+      <h3 style="margin-top: 0;">Select a Profile Image</h3>
+
+      <div style="
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 10px; 
+        justify-items: center; 
+        margin-bottom: 20px;
+      ">
+        <img src="Profile1.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile2.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile3.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile4.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile5.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile6.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile7.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile8.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+        <img src="Profile9.png" class="selectable-image" style="width:80px; height:80px; cursor:pointer;">
+      </div>
+
+      <label for="usernameInput">Enter Username:</label><br>
+      <input 
+        type="text" 
+        id="usernameInput" 
+        placeholder="Enter name" 
+        style="margin-top:5px; padding:5px; width: 90%; max-width: 300px;"
+      >
+      <br><br>
+      <button onclick="closeModal()">Close</button>
+    </div>
+
+    <script>
+      const profileImage = document.querySelector('.profile-images');
+      const modal = document.getElementById('imageModal');
+      let selectedImageSrc = profileImage.src;
+
+      // Load stored profile image and username on page load
+      window.onload = function () {
+        const storedImage = localStorage.getItem('profileImage');
+        const storedName = localStorage.getItem('username');
+
+        if (storedImage) {
+          profileImage.src = storedImage;
+          selectedImageSrc = storedImage;
+        }
+
+        if (storedName) {
+          const textElements = document.querySelectorAll('.text-wrapper-9');
+          if (textElements.length > 0) {
+            textElements[0].textContent = storedName;
+          }
+          const input = document.getElementById('usernameInput');
+          if (input) input.value = storedName;
+        }
+      };
+
+      profileImage.style.cursor = "pointer";
+      profileImage.onclick = () => {
+        modal.style.display = 'block';
+      };
+
+      document.querySelectorAll('.selectable-image').forEach(img => {
+        img.onclick = () => {
+          selectedImageSrc = img.src;
+          // Optional: visually highlight selected
+          document.querySelectorAll('.selectable-image').forEach(i => i.style.border = '');
+          img.style.border = '2px solid blue';
+        };
+      });
+
+      function closeModal() {
+        modal.style.display = 'none';
+        profileImage.src = selectedImageSrc;
+
+        const usernameInput = document.getElementById('usernameInput').value;
+        if (usernameInput.trim() !== '') {
+          // Update the first .text-wrapper-9 (assumed to be the username)
+          const textElements = document.querySelectorAll('.text-wrapper-9');
+          if (textElements.length > 0) {
+            textElements[0].textContent = usernameInput;
+          }
+          localStorage.setItem('username', usernameInput);
+        }
+        localStorage.setItem('profileImage', selectedImageSrc);
+      }
+    </script>
   </body> 
 </html>
