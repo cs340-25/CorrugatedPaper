@@ -378,7 +378,7 @@
       }
     }
 
-    // Add class to schedule function
+    // Update the addClassToSchedule function to include a close button
     function addClassToSchedule(subject, courseNumber, title, meetingTime) {
       // Find the class buttons container
       const container = document.getElementById('classButtonsContainer');
@@ -405,9 +405,13 @@
         daysStr = daysMatch[1];
       }
       
+      // Create unique identifier for this class
+      const classId = `class-${subject}-${courseNumber}-${Date.now()}`;
+      
       // Create the class info button
       const classInfoBtn = document.createElement('div');
       classInfoBtn.className = 'class-info-button';
+      classInfoBtn.id = classId;
       classInfoBtn.onclick = function() { createTimeBlocks(this); };
       
       // Include the subject and course number in the format that createTimeBlocks expects
@@ -415,6 +419,7 @@
         <div class="class-name-info">${subject} ${courseNumber}</div>
         <div class="class-time-info">${timeStr}</div>
         <div class="class-days-info">${daysStr}</div>
+        <div class="class-close-btn" onclick="removeClassFromSchedule('${classId}', event)">&times;</div>
       `;
       
       // Add to the class buttons container (prepend to add to top)
@@ -434,6 +439,37 @@
       setTimeout(() => {
         createTimeBlocks(classInfoBtn);
       }, 100);
+    }
+
+    // New function to remove class from schedule
+    function removeClassFromSchedule(classId, event) {
+      // Stop event propagation to prevent clicking the parent
+      if (event) {
+        event.stopPropagation();
+      }
+      
+      // Get the class button element
+      const classButton = document.getElementById(classId);
+      if (!classButton) {
+        console.error("Class button not found:", classId);
+        return;
+      }
+      
+      // Get class info to match blocks
+      const className = classButton.querySelector('.class-name-info').textContent;
+      
+      // Remove all class blocks for this class
+      const blocks = document.querySelectorAll('.class-block');
+      blocks.forEach(block => {
+        const blockClassName = block.querySelector('.class-name')?.textContent?.trim();
+        
+        if (blockClassName === className) {
+          block.remove();
+        }
+      });
+      
+      // Remove the class button
+      classButton.remove();
     }
 
     // Helper function to get building code
