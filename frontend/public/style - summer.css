@@ -45,6 +45,8 @@ body {
   margin-bottom: 2px;
   text-align: center;
   position: relative;
+  font-family: "Garamond", serif;
+  font-weight: bold;
 }
 
 .text-wrapper-10 {
